@@ -19,7 +19,15 @@ const covid19ImpactEstimator = (data) => ({
   severeImpact: {
     currentlyInfected: (data.reportedCases * 50),
     get infectionsByRequestedTime() {
-      return this.currentlyInfected * 1024;
+      let result;
+      if (data.periodType === 'days') {
+        result = this.currentlyInfected * (2 ** convertDaysBy3(data.timeToElapse));
+      } if (data.periodType === 'weeks') {
+        result = this.currentlyInfected * (2 ** convertWeeksByDays(data.timeToElapse));
+      } if (data.periodType === 'months') {
+        result = this.currentlyInfected * (2 ** convertMonthsByDays(data.timeToElapse));
+      }
+      return result;
     }
   }
 });
