@@ -3,13 +3,13 @@ const covid19ImpactEstimator = (data) => ({
   estimate: {
     impact: {
       currentlyInfected: (data.reportedCases * 10),
-      get infectionsByRequestime() {
+      get infectionsByRequesTime() {
         return this.currentlyInfected * 1024;
       }
     },
     severeImpact: {
       currentlyInfected: (data.reportedCases * 50),
-      get infectionsByRequestime() {
+      get infectionsByRequesTime() {
         return this.currentlyInfected * 1024;
       }
     }
