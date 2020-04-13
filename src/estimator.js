@@ -14,6 +14,13 @@ const covid19ImpactEstimator = (data) => ({
         result = this.currentlyInfected * (2 ** convertMonthsByDays(data.timeToElapse));
       }
       return result;
+    },
+    get severeCasesByRequestedTime() {
+      return this.infectionsByRequestedTime * 0.15;
+    },
+    get hospitalBedsByRequestedTime() {
+      const availableBeds = data.totalHospitalBeds * 0.35;
+      return Math.ceil(availableBeds - this.severeCasesByRequestedTime);
     }
   },
   severeImpact: {
@@ -28,6 +35,13 @@ const covid19ImpactEstimator = (data) => ({
         result = this.currentlyInfected * (2 ** convertMonthsByDays(data.timeToElapse));
       }
       return result;
+    },
+    get severeCasesByRequestedTime() {
+      return this.infectionsByRequestedTime * 0.15;
+    },
+    get hospitalBedsByRequestedTime() {
+      const availableBeds = data.totalHospitalBeds * 0.35;
+      return Math.ceil(availableBeds - this.severeCasesByRequestedTime);
     }
   }
 });
