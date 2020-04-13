@@ -34,11 +34,11 @@ const covid19ImpactEstimator = (data) => ({
       let result;
       const infectByIncome = this.infectionsByRequestedTime * data.region.avgDailyIncomePopulation;
       if (data.periodType === 'days') {
-        result = infectByIncome * data.avgDailyIncomeInUSD * data.timeToElapse;
+        result = infectByIncome * data.region.avgDailyIncomeInUSD * data.timeToElapse;
       } if (data.periodType === 'weeks') {
-        result = infectByIncome * data.avgDailyIncomeInUSD * weeksToDays(data.timeToElapse);
+        result = infectByIncome * data.region.avgDailyIncomeInUSD * weeksToDays(data.timeToElapse);
       } if (data.periodType === 'months') {
-        result = infectByIncome * data.avgDailyIncomeInUSD * monthsToDays(data.timeToElapse);
+        result = infectByIncome * data.region.avgDailyIncomeInUSD * monthsToDays(data.timeToElapse);
       }
       return Math.round(result * 10) / 10;
     }
@@ -73,11 +73,11 @@ const covid19ImpactEstimator = (data) => ({
       let result;
       const infectByIncome = this.infectionsByRequestedTime * data.region.avgDailyIncomePopulation;
       if (data.periodType === 'days') {
-        result = infectByIncome * data.avgDailyIncomeInUSD * data.timeToElapse;
+        result = infectByIncome * data.region.avgDailyIncomeInUSD * data.timeToElapse;
       } if (data.periodType === 'weeks') {
-        result = infectByIncome * data.avgDailyIncomeInUSD * weeksToDays(data.timeToElapse);
+        result = infectByIncome * data.region.avgDailyIncomeInUSD * weeksToDays(data.timeToElapse);
       } if (data.periodType === 'months') {
-        result = infectByIncome * data.avgDailyIncomeInUSD * monthsToDays(data.timeToElapse);
+        result = infectByIncome * data.region.avgDailyIncomeInUSD * monthsToDays(data.timeToElapse);
       }
       return Math.round(result * 10) / 10;
     }
