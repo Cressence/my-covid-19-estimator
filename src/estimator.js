@@ -72,14 +72,15 @@ const covid19ImpactEstimator = (data) => ({
     get dollarsInFlight() {
       let result;
       const infectByIncome = this.infectionsByRequestedTime * data.region.avgDailyIncomePopulation;
+      const avgDaily = data.region.avgDailyIncomeInUSD;
       if (data.periodType === 'days') {
-        result = infectByIncome * data.region.avgDailyIncomeInUSD * data.timeToElapse;
+        result = (infectByIncome * avgDaily) / data.timeToElapse;
       } if (data.periodType === 'weeks') {
-        result = infectByIncome * data.region.avgDailyIncomeInUSD * weeksToDays(data.timeToElapse);
+        result = (infectByIncome * avgDaily) / weeksToDays(data.timeToElapse);
       } if (data.periodType === 'months') {
-        result = infectByIncome * data.region.avgDailyIncomeInUSD * monthsToDays(data.timeToElapse);
+        result = (infectByIncome * avgDaily) / monthsToDays(data.timeToElapse);
       }
-      return Math.round(result * 10) / 10;
+      return Math.trunc(result);
     }
   }
 });
