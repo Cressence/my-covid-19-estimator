@@ -1,4 +1,6 @@
-import { convertDaysBy3, convertWeeksByDays, convertMonthsByDays } from './functions';
+import {
+  convertDaysBy3, convertWeeksByDays, convertMonthsByDays, weeksToDays, monthsToDays
+} from './functions';
 
 const covid19ImpactEstimator = (data) => ({
   data,
@@ -21,6 +23,24 @@ const covid19ImpactEstimator = (data) => ({
     get hospitalBedsByRequestedTime() {
       const availableBeds = data.totalHospitalBeds * 0.35;
       return Math.ceil(availableBeds - this.severeCasesByRequestedTime);
+    },
+    get casesForICUByRequestedTime() {
+      return Math.floor(0.05 * this.infectionsByRequestedTime);
+    },
+    get casesForVentilatorsByRequestedTime() {
+      return Math.floor(0.02 * this.infectionsByRequestedTime);
+    },
+    get dollarsInFlight() {
+      let result;
+      const infectByIncome = this.infectionsByRequestedTime * data.region.avgDailyIncomePopulation;
+      if (data.periodType === 'days') {
+        result = infectByIncome * data.avgDailyIncomeInUSD * data.timeToElapse;
+      } if (data.periodType === 'weeks') {
+        result = infectByIncome * data.avgDailyIncomeInUSD * weeksToDays(data.timeToElapse);
+      } if (data.periodType === 'months') {
+        result = infectByIncome * data.avgDailyIncomeInUSD * monthsToDays(data.timeToElapse);
+      }
+      return Math.round(result * 10) / 10;
     }
   },
   severeImpact: {
@@ -42,6 +62,24 @@ const covid19ImpactEstimator = (data) => ({
     get hospitalBedsByRequestedTime() {
       const availableBeds = data.totalHospitalBeds * 0.35;
       return Math.ceil(availableBeds - this.severeCasesByRequestedTime);
+    },
+    get casesForICUByRequestedTime() {
+      return Math.floor(0.05 * this.infectionsByRequestedTime);
+    },
+    get casesForVentilatorsByRequestedTime() {
+      return Math.floor(0.02 * this.infectionsByRequestedTime);
+    },
+    get dollarsInFlight() {
+      let result;
+      const infectByIncome = this.infectionsByRequestedTime * data.region.avgDailyIncomePopulation;
+      if (data.periodType === 'days') {
+        result = infectByIncome * data.avgDailyIncomeInUSD * data.timeToElapse;
+      } if (data.periodType === 'weeks') {
+        result = infectByIncome * data.avgDailyIncomeInUSD * weeksToDays(data.timeToElapse);
+      } if (data.periodType === 'months') {
+        result = infectByIncome * data.avgDailyIncomeInUSD * monthsToDays(data.timeToElapse);
+      }
+      return Math.round(result * 10) / 10;
     }
   }
 });
