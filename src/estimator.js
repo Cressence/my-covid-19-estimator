@@ -40,7 +40,7 @@ const covid19ImpactEstimator = (data) => ({
       } if (data.periodType === 'months') {
         result = infectByIncome * data.region.avgDailyIncomeInUSD * monthsToDays(data.timeToElapse);
       }
-      return Math.round(result * 10) / 10;
+      return Math.trunc(result);
     }
   },
   severeImpact: {
