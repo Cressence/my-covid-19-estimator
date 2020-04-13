@@ -25,10 +25,10 @@ const covid19ImpactEstimator = (data) => ({
       return Math.trunc(availableBeds - this.severeCasesByRequestedTime);
     },
     get casesForICUByRequestedTime() {
-      return Math.floor(0.05 * this.infectionsByRequestedTime);
+      return Math.trunc(0.05 * this.infectionsByRequestedTime);
     },
     get casesForVentilatorsByRequestedTime() {
-      return Math.floor(0.02 * this.infectionsByRequestedTime);
+      return Math.trunc(0.02 * this.infectionsByRequestedTime);
     },
     get dollarsInFlight() {
       let result;
@@ -64,10 +64,10 @@ const covid19ImpactEstimator = (data) => ({
       return Math.trunc(availableBeds - this.severeCasesByRequestedTime);
     },
     get casesForICUByRequestedTime() {
-      return Math.floor(0.05 * this.infectionsByRequestedTime);
+      return Math.trunc(0.05 * this.infectionsByRequestedTime);
     },
     get casesForVentilatorsByRequestedTime() {
-      return Math.floor(0.02 * this.infectionsByRequestedTime);
+      return Math.trunc(0.02 * this.infectionsByRequestedTime);
     },
     get dollarsInFlight() {
       let result;
