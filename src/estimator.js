@@ -22,7 +22,7 @@ const covid19ImpactEstimator = (data) => ({
     },
     get hospitalBedsByRequestedTime() {
       const availableBeds = data.totalHospitalBeds * 0.35;
-      return Math.floor(availableBeds - this.severeCasesByRequestedTime);
+      return Math.trunc(availableBeds - this.severeCasesByRequestedTime);
     },
     get casesForICUByRequestedTime() {
       return Math.floor(0.05 * this.infectionsByRequestedTime);
@@ -61,7 +61,7 @@ const covid19ImpactEstimator = (data) => ({
     },
     get hospitalBedsByRequestedTime() {
       const availableBeds = data.totalHospitalBeds * 0.35;
-      return Math.floor(availableBeds - this.severeCasesByRequestedTime);
+      return Math.trunc(availableBeds - this.severeCasesByRequestedTime);
     },
     get casesForICUByRequestedTime() {
       return Math.floor(0.05 * this.infectionsByRequestedTime);
